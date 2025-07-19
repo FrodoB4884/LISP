@@ -1,0 +1,138 @@
+:root {
+  --light: #E5F6DF;
+  --middle: #80b878;
+  --dark: #658d78;
+  --darker: #385445;
+
+  --height: calc(100vh - 3rem); /* hahahaha this isn't cursed at all */
+}
+
+img.pixel-logo {
+  image-rendering: pixelated;
+  display: block;
+  margin: auto;
+}
+
+img.pixel-logo.small {
+  width: min(186px, 100%);
+}
+
+img.pixel-logo.large {
+  width: min(372px, 100%);
+}
+
+body {
+  background-color: var(--light);
+  font-size: large;
+}
+
+html {
+  overflow: hidden; /* hahahaha again definitely not cursed (dies of sarcasm), is intentional dw */
+}
+
+.styled-table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  min-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+
+.styled-table thead tr {
+    background-color: var(--middle);
+    color: #ffffff;
+    text-align: left;
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid var(--middle);
+    border-radius: 2px;
+}
+
+.wrapper {
+  gap: 1rem;
+  display: flex;
+  height: 100vh; /* or 100dvh for better mobile support */
+  overflow: hidden;
+}
+
+.main,
+.sidebar {
+  border: 3px solid var(--dark);
+  border-radius: 4px;
+  padding: 15px;
+  background-color: var(--light);
+}
+
+.main {
+  width: 80%;
+  height: var(--height);
+  overflow-y: auto;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  padding: clamp(0.25rem, 1vw, 0.75rem);
+}
+
+.sidebar {
+  top: 0;
+  left: 0;
+  width: 15%;
+  height: var(--height);
+  overflow-y: auto;
+  background-color: var(--light);
+  padding: clamp(0.25rem, 1vw, 0.75rem);
+}
+
+.sidebar-btn-container {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.sidebar-btn {
+  display: block;
+  padding: clamp(0.25rem, 1vw, 0.75rem) clamp(0.35rem, 1vw, 1rem);
+  margin: 0.25rem;
+  background-color: var(--middle);
+  color: var(--light);
+  text-decoration: none;
+  border: none;
+  border-radius: 4px;
+  text-align: left;
+  transition: background-color 0.2s ease;
+  font-size: clamp(0.75rem, 2vw, 1rem);
+}
+
+.sidebar-btn:hover {
+  background-color: var(--dark);
+}
+
+.btn {
+  display: block;
+  padding: 0.25rem 0.5rem;
+  margin: 0.1rem;
+  background-color: var(--middle);
+  color: var(--light);
+  text-decoration: none;
+  border: none;
+  border-radius: 4px;
+  text-align: left;
+  transition: background-color 0.2s ease;
+}
+
+.btn:hover {
+  background-color: var(--dark);
+}

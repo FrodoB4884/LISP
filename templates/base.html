@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>LISP Manager</title>
+        <link rel="stylesheet" href="../static/style.css">
+        <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+        <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.6/dist/htmx.min.js"></script>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="sidebar">
+                <img src="../static/logo.png" class="pixel-logo small">
+
+                <div class="sidebar-btn-container">
+                    <a href="/" class="sidebar-btn">Home</a>
+                    <a href="/manager" class="sidebar-btn">Manager</a>
+                    <a href="/pos" class="sidebar-btn">POS</a>
+                </div>
+            </div>
+
+            <div class="main", id="main">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </body>
+</html>
