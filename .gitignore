@@ -1,0 +1,4 @@
+*.bat
+scripts/
+*.pyc
+__pycache__/
