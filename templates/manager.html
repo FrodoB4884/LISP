@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Manager Dashboard</h1>
+
+    <button hx-get="/stock/stock_list" hx-target="#stock-list" hx-swap="innerHTML", class="btn">
+        Refresh Stocks
+    </button>
+
+    <div id="stock-list">
+        {% include 'partials/_stock_list.html' %}
+    </div>
+{% endblock %}
