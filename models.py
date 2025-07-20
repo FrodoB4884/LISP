@@ -18,14 +18,14 @@ class Customer:
             "id": self.id
         }
     
-@dataclass
+@dataclass(frozen=True)
 class ItemType:
     name: str
     part_no: str
     item_group: str
     cost: float
     id: int | None = None
-
+    
     def to_dict(self):
         return {
             "name": self.name,

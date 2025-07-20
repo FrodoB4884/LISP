@@ -2,6 +2,7 @@ import sqlite3 as sql
 from config import *
 from models import *
 import os
+from datetime import datetime
 
 def get_connection():
     conn = sql.connect(DB_PATH)
@@ -215,7 +216,8 @@ def get_order_by_id(id) -> Order | None:
             except ValueError:
                 print(f"Unknown change log status: {row[1]}. Defaulting to UNKNOWN")
                 log_status = OrderStatus.UNKNOWN
-            change_log.append((row[0], log_status, row[2]))
+            dt = datetime.strptime(row[0], "%Y-%m-%d %H:%M:%S")
+            change_log.append((dt, log_status, row[2]))
 
         # get items
         items = {}
@@ -233,6 +235,30 @@ def get_order_by_id(id) -> Order | None:
             items[ItemType(row[1], row[2], row[3], row[4], row[0])] = row[5]
 
         return Order(customer, items, status, change_log, id)
+    
+def get_all_orders() -> list[Order] | None:
+    with get_connection() as conn:
+        cursor = conn.cursor()
+        cursor.execute("SELECT id FROM orders")
+
+        rows = cursor.fetchall()
+
+        if not rows:
+            return None
+
+        order_ids = [row[0] for row in rows]
+
+        all_orders = []
+        for order_id in order_ids:
+            order = get_order_by_id(order_id)
+
+            if order:
+                all_orders.append(order)
+            else:
+                raise ValueError("Unknown customer id found in customers. Fatal database error.")
+            
+        return all_orders 
+
 
 def create_order(order:Order) -> int | None:
     with get_connection() as conn:

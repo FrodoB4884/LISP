@@ -1,0 +1,47 @@
+<table class="styled-table">
+    <thead>
+        <tr>
+            <th>Customer ID</th>
+            <th>Items</th>
+            <th>Status</th>
+            <th>Change Log</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in orders %}
+            <!-- Main Row -->
+            <tr>
+                <td>{{ order.customer.id }}</td>
+                <td>
+                    <button onclick="toggleRow('items-{{ order.id }}')" class="btn">Toggle Items</button>
+                </td>
+                <td>{{ order.status.value }}</td>
+                <td>
+                    <button onclick="toggleRow('log-{{ order.id }}')" class="btn">Toggle Changelog</button>
+                </td>
+            </tr>
+
+            <!-- Items Row (hidden by default) -->
+            <tr id="items-{{ order.id }}" style="display: none;">
+                <td colspan="4">
+                    <div class="item-grid">
+                        {% for item, quantity in order.items.items() %}
+                            <div>{{ item.name }} x{{ quantity }}</div>
+                        {% endfor %}
+                    </div>
+                </td>
+            </tr>
+
+            <!-- Change Log Row (also hidden) -->
+            <tr id="log-{{ order.id }}" style="display: none;">
+                <td colspan="4">
+                    <div class="log-grid">
+                        {% for ts, status, comment in order.change_log %}
+                            <div>{{ ts.strftime('%Y-%m-%d %H:%M') }} - {{ status.value }} - {{ comment }}</div>
+                        {% endfor %}
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

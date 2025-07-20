@@ -1,13 +1,27 @@
 {% extends "base.html" %}
 
+{% block title %}LISP - Manager{% endblock %}
+
 {% block content %}
     <h1>Manager Dashboard</h1>
+    <div class="dashboard-grid">
+        <div class="table-section">
+            <button hx-get="/stock/stock_list" hx-target="#stock-list" hx-swap="innerHTML", class="btn">
+                Refresh Stocks
+            </button>
 
-    <button hx-get="/stock/stock_list" hx-target="#stock-list" hx-swap="innerHTML", class="btn">
-        Refresh Stocks
-    </button>
+            <div id="stock-list">
+                {% include 'partials/_stock_list.html' %}
+            </div>
+        </div>
+        <div class="table-section">
+            <button hx-get="/orders/orders_list" hx-target="#orders-list" hx-swap="innerHTML", class="btn">
+                Refresh Orders
+            </button>
 
-    <div id="stock-list">
-        {% include 'partials/_stock_list.html' %}
+            <div id="orders-list">
+                {% include 'partials/_orders_list.html' %}
+            </div>
+        </div>
     </div>
 {% endblock %}
