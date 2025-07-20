@@ -1,6 +1,7 @@
 import subprocess
 from pathlib import Path
 
-subprocess.run(["git", "pull"], check=True)
+repo_path = "/home/EliotPotts/LISP"
+subprocess.run(["git", "pull"], cwd=repo_path, check=True)
 
 Path("/var/www/eliotpotts_pythonanywhere_com_wsgi.py").touch()
