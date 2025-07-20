@@ -164,7 +164,7 @@ def create_new_stock(stock:Stock) -> int | None:
     with get_connection() as conn:
         cursor = conn.cursor()
         try:
-            cursor.execute("INSERT INTO stock (item_type_id, in_stock, reserved, reorder_point) VALUES (?, ?, ?, ?)", (stock.item_type.id, stock.in_stock, stock.reserved, stock.reorder_point))
+            cursor.execute("INSERT INTO stock (item_type_id, location_id, in_stock, reserved, reorder_point) VALUES (?, ?, ?, ?, ?)", (stock.item_type.id, stock.location.id, stock.in_stock, stock.reserved, stock.reorder_point))
             return cursor.lastrowid
         except sql.Error as e:
             print(f"Stock creation failed: {e}")
@@ -174,7 +174,7 @@ def update_stock(item_type_id, updated_stock:Stock) -> bool:
     with get_connection() as conn:
         cursor = conn.cursor()
         try:
-            cursor.execute("UPDATE stock SET item_type_id = ?, in_stock = ?, reserved = ?, reorder_point = ? WHERE item_type_id = ?", (updated_stock.item_type.id, updated_stock.in_stock, updated_stock.reserved, updated_stock.reorder_point, item_type_id))
+            cursor.execute("UPDATE stock SET item_type_id = ?, location_id = ?, in_stock = ?, reserved = ?, reorder_point = ? WHERE item_type_id = ?", (updated_stock.item_type.id, updated_stock.location.id, updated_stock.in_stock, updated_stock.reserved, updated_stock.reorder_point, item_type_id))
             return True
         except sql.Error as e:
             print(f"Stock update failed: {e}")

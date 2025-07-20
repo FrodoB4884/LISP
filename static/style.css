@@ -1,4 +1,5 @@
 :root {
+  --lighter:#ffffff;
   --light: #E5F6DF;
   --middle: #80b878;
   --dark: #658d78;
@@ -35,27 +36,46 @@ html {
   border-collapse: collapse;
   margin: 25px 0;
   font-size: 0.9em;
-  min-width: 400px;
+  min-width: 600px;
+  table-layout: fixed;
+  width: 100%;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
 .styled-table th,
 .styled-table td {
-    padding: 12px 15px;
+  padding: 12px;
+  max-width: 200px;        /* fixed max width */
+  white-space: nowrap;     /* no line breaks */
+  overflow-x: auto;        /* horizontal scroll if needed */
+  overflow-y: hidden;      /* hide vertical overflow just in case */
+  text-overflow: clip;     /* don’t do ellipsis */
+  
+  /* Hide scrollbars */
+  scrollbar-width: none;   /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+  position: relative;      /* for potential gradient fade later */
 }
 
+/* Hide scrollbars in WebKit browsers */
+.styled-table th::-webkit-scrollbar,
+.styled-table td::-webkit-scrollbar {
+  display: none;
+}
+
+
 .styled-table thead tr {
-    background-color: var(--middle);
-    color: #ffffff;
-    text-align: left;
+  background-color: var(--middle);
+  color: var(--light);
+  text-align: left;
 }
 
 .styled-table tbody tr {
-    border-bottom: 1px solid #dddddd;
+  border-bottom: 1px solid var(--light);
 }
 
 .styled-table tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
+  background-color: var(--lighter);
 }
 
 .styled-table tbody tr:last-of-type {
@@ -145,13 +165,13 @@ html {
 }
 
 .table-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 2rem; /* spacing between sections */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem; /* spacing between sections */
 }
 
-tr[style*="display: none"] {
+.styled-table th[style*="display: none"] {
     transition: all 0.3s ease;
 }
 

@@ -1,5 +1,5 @@
 from __future__ import annotations
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from enum import Enum
 from datetime import datetime
 
@@ -18,13 +18,16 @@ class Customer:
             "id": self.id
         }
     
-@dataclass(frozen=True)
+@dataclass
 class ItemType:
     name: str
     part_no: str
     item_group: str
     cost: float
     id: int | None = None
+
+    def __hash__(self):
+        return hash((self.name, self.part_no, self.item_group, self.cost, self.id))
     
     def to_dict(self):
         return {
@@ -75,9 +78,9 @@ class Stock:
 @dataclass
 class Order:
     customer: Customer
-    items: dict[ItemType, int]  # item_type_id , quantity
+    items: dict[ItemType, int]  # item_type , quantity
     status: OrderStatus
-    change_log: list[tuple[datetime, OrderStatus, str]]
+    change_log: list[tuple[datetime, OrderStatus, str]] = field(default_factory=list)
     id: int | None = None
 
     def change_log_dict(self):
